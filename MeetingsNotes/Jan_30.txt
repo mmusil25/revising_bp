@@ -1,0 +1,25 @@
+Meeting Jan 30 2019
+
+Attendees: Mark, Jian, Peilong, Yuhao
+
+PDS, Work Schedule, and Project Proposal due Friday Feb. 1 
+ 
+
+Progress/Ideas:
+
+Generative Adverserial Networks
+
+Yuhao presented how convolutional layers use pooling to reduce noise. 
+
+I (Mark) will look into different loss functions from Pytorch (https://pytorch.org/docs/stable/nn.html#loss-functions)
+
+
+
+Next week's to do:
+
+1. PDS, work schedule (Peilong, Jian, Yuhao), Project Proposal  
+
+
+
+
+
