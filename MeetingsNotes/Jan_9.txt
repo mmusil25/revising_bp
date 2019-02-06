@@ -1,0 +1,36 @@
+ 
+Meeting Notes Jan 9, 2019
+
+Questions for sponsor:
+
+1. What type of back prop? CNN, RNN, fully connected? 
+2. Classification or regression? 
+3. What exactly needs to be improved? 
+
+
+Questions for Schubert/Andrew:
+
+1. What kind of license should we use for our private repo? 
+
+Questions for Team: 
+
+What version of python should we use? 3.7
+
+
+Deliverables: 
+
+* Weekly Progress Report on Sunday Nights (Jian)
+* Github Documentation 
+* Presentation for Manny Muro 
+
+
+Timeline:
+
+
+Week 1 - Week 2: (Jan 9 - 20) Self learning about back propagation 
+Week 3 (Jan 20 - 27): Try and schedule for Wednesday the 23rd
+Week 4 (Jan 28 - Feb 3): Write proposal 
+Week 5 (Feb 4 - 10): Meet again to confirm proposal and begin more specic research
+Week 6 - 7 (Feb 11 - 24): Research time and brainstorming
+Week 8 - spring break (Feb 25 - March 31): Begin working on chosen solution
+ 
