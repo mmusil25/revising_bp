@@ -1,72 +1,116 @@
 """
 Name: Mark Musil
-Date: November 21, 2018
+Date: February 9, 2018
 
 Project: Revised Backpropagation capstone
 
 Description:
 
 This is a simple CNN for MNIST digit recognition based of the design
-at https://towardsdatascience.com/a-simple-2d-cnn-for-mnist-digit-recognition-a998dbc1e79a
+at https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials/02-intermediate
+
 
 This network was created to practice using Pytorch. It is based on a previous project
 done in Keras, hence the name.
 
 """
+import torch 
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
 
-from pathlib import Path
-import requests
 
-DATA_PATH = Path("data")
-PATH = DATA_PATH/"mnist"
-PATH.mkdir(parents=True, exist_ok=True)
+# Device configuration
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-URL = "http://deeplearning.net/data/mnist/"
-FILENAME = "mnist.pkl.gz"
+# Hyper parameters
+num_epochs = 5
+num_classes = 10
+batch_size = 100
+learning_rate = 0.001
 
-if not (PATH/FILENAME).exists():
-    content = requests.get(URL + FILENAME).content
-    (PATH/FILENAME).open("wb").write(content)
+# MNIST dataset
+train_dataset = torchvision.datasets.MNIST(root='../../data/',
+                                           train=True, 
+                                           transform=transforms.ToTensor(),
+                                           download=True)
 
-###############################################################################
-# This dataset is in numpy array format, and has been stored using pickle,
-# a python-specific format for serializing data.
+test_dataset = torchvision.datasets.MNIST(root='../../data/',
+                                          train=False, 
+                                          transform=transforms.ToTensor())
 
-import pickle
-import gzip
+# Data loader
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
+                                           batch_size=batch_size, 
+                                           shuffle=True)
 
-with gzip.open((PATH / FILENAME).as_posix(), "rb") as f:
-    ((x_train, y_train), (x_valid, y_valid), _) = pickle.load(f, encoding="latin-1")
+test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                          batch_size=batch_size, 
+                                          shuffle=False)
 
-###############################################################################
-# Each image is 28 x 28, and is being stored as a flattened row of length
-# 784 (=28x28). Let's take a look at one; we need to reshape it to 2d
-# first.
+# Convolutional neural network (two convolutional layers)
+class ConvNet(nn.Module):
+    def __init__(self, num_classes=10):
+        super(ConvNet, self).__init__()
+        self.layer1 = nn.Sequential(
+            nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2),
+            nn.BatchNorm2d(16),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2))
+        self.layer2 = nn.Sequential(
+            nn.Conv2d(16, 32, kernel_size=5, stride=1, padding=2),
+            nn.BatchNorm2d(32),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2))
+        self.fc = nn.Linear(7*7*32, num_classes)
+        
+    def forward(self, x):
+        out = self.layer1(x)
+        out = self.layer2(out)
+        out = out.reshape(out.size(0), -1)
+        out = self.fc(out)
+        return out
 
-from matplotlib import pyplot
-import numpy as np
-pyplot.imshow(x_train[0].reshape((28,28)), cmap = "gray")
-print(x_train.shape)
+model = ConvNet(num_classes).to(device)
 
-###############################################################################
-# PyTorch uses ``torch.tensor``, rather than numpy arrays, so we need to
-# convert our data.
+# Loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-import torch
-x_train, y_train, x_valid, y_valid = map(
-    torch.tensor, (x_train, y_train, x_valid, y_valid)
-)
-n, c = x_train.shape
-x_train, x_train.shape, y_train.min(), y_train.max()
-print(x_train, y_train)
-print(x_train.shape)
-print(y_train.min(), y_train.m
+# Train the model
+total_step = len(train_loader)
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        images = images.to(device)
+        labels = labels.to(device)
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        if (i+1) % 100 == 0:
+            print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' 
+                   .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
 
-###############################################################################
-# Build the network class
+# Test the model
+model.eval()  # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
+with torch.no_grad():
+    correct = 0
+    total = 0
+    for images, labels in test_loader:
+        images = images.to(device)
+        labels = labels.to(device)
+        outputs = model(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
 
-class Mnist_CNN(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.conv1 = torch.nn.Conv2d(1, 16, kernel_size=3, stride=2, padding=1)
-        self.conv2 = torch.nn.Conv2d
+    print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
+
+# Save the model checkpoint
+torch.save(model.state_dict(), 'model.ckpt')
