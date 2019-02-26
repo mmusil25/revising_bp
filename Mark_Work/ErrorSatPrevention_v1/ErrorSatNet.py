@@ -18,7 +18,6 @@ class Layer:
 
 class XORNet:
 
-
     """Neural network structure
     Construct the three layer XOR neural network and train it.
     """
@@ -79,10 +78,12 @@ class XORNet:
 
             # 3. Descend that gradient! (weight updates)
 
+
             # Adjustment
             layer1_adjustment = lr * training_input[iteration].T.dot(layer1_diff)
             layer2_adjustment = lr * layer1_out.T.dot(layer2_diff)
             layer3_adjustment = lr * layer2_out.T.dot(layer3_diff)
+
             # Update the weights
             self.layer1.weights += layer1_adjustment
             self.layer2.weights += layer2_adjustment
