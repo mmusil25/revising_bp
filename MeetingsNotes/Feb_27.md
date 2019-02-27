@@ -13,6 +13,8 @@ markdown reference: //guides.github.com/features/mastering-markdown/
 
 Maybe Manny thinks we should be eliminating noise early in the network so that it is not multiplied. 
 
+We should meet with John Lipor in Spring term. He will be gone during Spring break most likely. 
+
 ###  Updates
 
 **Jian** - Working on analyzing input noise using adverserial networks. 
