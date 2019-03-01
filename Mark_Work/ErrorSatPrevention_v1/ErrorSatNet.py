@@ -6,141 +6,114 @@ Original author: Jian Meng, modified by Mark Musil
 Description: A network which tests the error saturation prevention methodology. This example uses a simple XOR network.
 
 """
-
 import numpy as np
+import random
+from numpy import exp, array, random, dot
 
 
-class Layer:
-
-    def __init__(self, num_neurons, neuron_inputs):  # Outputs dim x input dim
-        self.weights = 2 * np.random.random((neuron_inputs, num_neurons)) - 1
-
-
-class XORNet:
-
-    """Neural network structure
-    Construct the three layer XOR neural network and train it.
-    """
-    # Two layers network
-    def __init__(self):
-        self.layer1 = Layer(3, 2)  # 3 outputs, 2 inputs
-        self.layer2 = Layer(3, 3)
-        self.layer3 = Layer(1, 3)
-
-        # self.layer1 = 2 * np.random.random((3, 2)) - 1  # 3 outputs, 2 inputs
-        # self.layer2 = 2 * np.random.random((3, 3)) - 1
-        # self.layer3 = 2 * np.random.random((3, 3)) - 1
-    
-    # Activation function: sigmoid
-    
-    def sigmoid(self, x):
-        return 1 + np.exp(-x)
-    # Derivative of sigmoid
-    # def diff_sigmoid(self, z):
-    #    return activation
-
-    # Derivative of sigmoid
-    def diff_sigmoid(self, z): # If this network allows range of neurons to be [-1, 1] this may cause problems.
-        return z * (1 - z)
-
-    # Feed forward and return the hidden weights
-    def forward_hidden(self, inputs):
-        out_layer1 = self.sigmoid(np.dot(inputs, self.layer1.weights))  # Input layer => Hiddenlayer1
-        out_layer2 = self.sigmoid(np.dot(out_layer1, self.layer2.weights))  # Hiddenlayer1 => Hiddenlayer2
-        out_layer3 = self.sigmoid(np.dot(out_layer2, self.layer3.weights))
-        return out_layer1, out_layer2, out_layer3
-
-    def predict(self, input_array): # This should be used after the network is trained to make predictions on the data
-        _, _, prediction = self.forward_hidden(input_array)
-        return prediction
-
-    # Training: 
-    def train(self, training_input, training_target, num_iter, lr):
-        for iteration in range(num_iter):
-
-            # 1. Feed forward and get error
-            layer1_out, layer2_out, layer3_out = self.forward_hidden(training_input[iteration])
-            error = training_target[iteration] - layer3_out
-            print('### Iter: ' + str(iteration) + ' ### Input: ' + str(training_input[iteration]) + ' Ground truth: ' +
-                  str(training_target[iteration]) + ' Output: ' + str(layer3_out) + ' Error: ' + str(error))
-            # 2. Backpropagation of error
-
-            # Hidden layer 3 error
-            layer3_diff = error * self.diff_sigmoid(layer3_out)
-
-            # Hidden layer 2 error
-            layer2_error = np.dot(layer3_diff, self.layer3.weights.T)
-            layer2_diff = layer2_error * self.diff_sigmoid(layer2_out)
-
-            # Hidden layer1 Error
-            layer1_error = np.dot(layer2_diff, self.layer2.weights.T)
-            layer1_diff = layer1_error * self.diff_sigmoid(layer1_out)
-
-            # 3. Descend that gradient! (weight updates)
+class NeuronLayer():
+    def __init__(self, number_of_neurons, number_of_inputs_per_neuron):
+        self.synaptic_weights = 2 * random.random((number_of_inputs_per_neuron, number_of_neurons)) - 1
 
 
-            # Adjustment
-            layer1_adjustment = lr * training_input[iteration].T.dot(layer1_diff)
-            layer2_adjustment = lr * layer1_out.T.dot(layer2_diff)
-            layer3_adjustment = lr * layer2_out.T.dot(layer3_diff)
+class NeuralNetwork():
+    def __init__(self, layer1, layer2):
+        self.layer1 = layer1
+        self.layer2 = layer2
 
-            # Update the weights
-            self.layer1.weights += layer1_adjustment
-            self.layer2.weights += layer2_adjustment
-            self.layer3.weights += layer3_adjustment
-# class Data_Generator():
-#     def __init__(self, data_size, num_inputs):
-#         self.data_size = data_size
-#         self.num_inputs = num_inputs
-    
-#     def logic_xor(self, x1, x2):
-#         if x1 > 1.5 or x2 > 1.5:
-#             raise ValueError("The inputs must be less than 1.5")
-#         elif x1 < 0.0 or x2 < 0.0:
-#             raise ValueError("The inputs must be greater than 0")
-        
+    # The Sigmoid function, which describes an S shaped curve.
+    def __sigmoid(self, x):
+        return 1 / (1 + exp(-x))
 
-#     def XOR_generator(self, noise_level):
-#         """Generate the data sets and the target vector
-#         """
-#         Data_Set = np.zeros([self.num_inputs, self.data_size])
-#         for ii in range(self.data_size):
-#             pass
+    # The derivative of the Sigmoid function.
+    def __sigmoid_derivative(self, x):
+        return x * (1 - x)
 
-    
+    # The neural network thinks.
+    def feed_forward(self, inputs):
+        output_from_layer1 = self.__sigmoid(dot(inputs, self.layer1.synaptic_weights))
+        output_from_layer2 = self.__sigmoid(dot(output_from_layer1, self.layer2.synaptic_weights))
+        return output_from_layer1, output_from_layer2
+
+    # The neural network prints its weights
+    def print_weights(self):
+        print("    Layer 1 (4 neurons, each with 2 inputs): ")
+        print(self.layer1.synaptic_weights)
+        print("    Layer 2 (1 neuron, with 4 inputs):")
+        print(self.layer2.synaptic_weights)
+
+    # Neural Network Training phase
+    def train(self, training_set_inputs, training_set_outputs, number_of_training_iterations, lr):
+        for iteration in range(number_of_training_iterations):
+            # Pass the training set through our neural network
+            output_from_layer_1, output_from_layer_2 = self.feed_forward(training_set_inputs)
+
+            # Calculate the error for layer 2
+            layer2_error = training_set_outputs - output_from_layer_2
+            layer2_delta = layer2_error * self.__sigmoid_derivative(output_from_layer_2)
+
+            # Calculate the error for layer 1
+            layer1_error = layer2_delta.dot(self.layer2.synaptic_weights.T)
+            layer1_delta = layer1_error * self.__sigmoid_derivative(output_from_layer_1)
+
+            # Increment of the update
+            layer1_adjustment = training_set_inputs.T.dot(layer1_delta)
+            layer2_adjustment = output_from_layer_1.T.dot(layer2_delta)
+
+            # Adjust the weights
+            self.layer1.synaptic_weights += lr * layer1_adjustment
+            self.layer2.synaptic_weights += lr * layer2_adjustment
+
+
+class Data_Generator():
+    def __init__(self, data_size=None):
+        if data_size == None:
+            self.data_size = 100
+        else:
+            self.data_size = data_size
+
+    def xor_generator(self):
+        NN_input = np.zeros([self.data_size, 2])
+        NN_target = np.zeros([self.data_size, 1])
+        for ii in range(self.data_size):
+            x1 = int(random.uniform(0, 2, 1))
+            x2 = int(random.uniform(0, 2, 1))
+            out = int(bool(x1 ^ x2))
+            NN_input[ii, :] = np.array([x1, x2])
+            NN_target[ii] = out
+        return NN_input, NN_target
+
+
 def main():
+    random.seed(1)
 
-    # Randomness
-    np.random.seed(1)
+    # Create the first layer (4 neurons, each with 2 inputs)
+    layer1 = NeuronLayer(4, 2)
 
-    # Make the training data
+    # Create the second layer (a single neuron with 4 inputs)
+    layer2 = NeuronLayer(1, 4)
 
-    training_examples = 1000
-    x_train = np.zeros((training_examples, 2), dtype=int)
-    y_train = np.ones(training_examples, dtype=int)
-    for i in range(training_examples):
-        # Generate two random numbers for XORing
-        entry_one = np.random.randint(0, 1)
-        entry_two = np.random.randint(0, 1)
-        x_train[i, 0] = entry_one
-        x_train[i, 1] = entry_two
+    # Combine the layers to create a neural network
+    neural_network = NeuralNetwork(layer1, layer2)
+    print(f"Randomly initialize weights: {neural_network.print_weights()}")
 
-        # Calculate xor of the two entries
-        if (entry_one & entry_one) | (~entry_one & ~entry_two):
-            y_train[i] = 0
+    # Generate the training set
+    DATA_SIZE = 100
+    trainig_data = Data_Generator(int(0.8 * DATA_SIZE))
+    training_set_inputs, training_set_outputs = trainig_data.xor_generator()
+    print(np.shape(training_set_inputs))
+    # Training phase
+    neural_network.train(training_set_inputs, training_set_outputs, 1000, 0.1)
+    print(f"Stage 2) New weights after training: {neural_network.print_weights()}")
 
-    x_test = np.array([[0, 1],
-                       [1, 1],
-                       [0, 0],
-                       [1, 0]])
-
-    network = XORNet()
-    num_iter = x_train.shape[0]
-    learning_rate = 0.001
-    network.train(x_train, y_train, num_iter, learning_rate)
-
-    for i in range(x_test.shape[0]):
-        print( 'Input: ' + str(x_test[i]) + ' Output: ' + str(network.predict(x_test[i])))
+    # Test phase
+    test_data = Data_Generator(int(0.2 * DATA_SIZE))
+    test_set_inputs, test_set_outputs = test_data.xor_generator()
+    for ii in range(np.shape(test_set_inputs)[0]):
+        _, output = neural_network.feed_forward(test_set_inputs[ii])
+        print(f"X1 = {test_set_inputs[ii, 0]}, X2 = {test_set_inputs[ii, 1]}")
+        print(f"True output = {test_set_outputs[ii]}, Prediction = {output}")
 
 
-x = main()
+if __name__ == '__main__':
+    main()
