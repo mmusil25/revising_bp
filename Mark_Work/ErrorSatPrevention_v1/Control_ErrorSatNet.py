@@ -12,13 +12,6 @@ from numpy import exp, array, random, dot
 import matplotlib.pyplot as plt
 
 
-def esp(alpha, out, n):
-    return alpha*(out - 0.5)**n
-
-#esp(16, output_from_layer_2, 4)
-
-
-
 
 class NeuronLayer():
     def __init__(self, number_of_neurons, number_of_inputs_per_neuron):
@@ -59,7 +52,7 @@ class NeuralNetwork():
             output_from_layer_1, output_from_layer_2 = self.feed_forward(training_set_inputs)
 
             # Calculate the error for layer 2
-            layer2_error = (training_set_outputs - output_from_layer_2) + esp(8, output_from_layer_2, 4)
+            layer2_error = training_set_outputs - output_from_layer_2
             mse[iteration] = np.mean(layer2_error**2)
             layer2_delta = layer2_error * self.__sigmoid_derivative(output_from_layer_2)
 
@@ -75,6 +68,7 @@ class NeuralNetwork():
             self.layer1.synaptic_weights += lr * layer1_adjustment
             self.layer2.synaptic_weights += lr * layer2_adjustment
         return np.mean(mse), mse
+
 
 class Data_Generator():
     def __init__(self, data_size=None):
@@ -113,8 +107,8 @@ def main():
 
     # Generate the training set
     DATA_SIZE = 100
-    trainig_data = Data_Generator(int(0.8 * DATA_SIZE))
-    training_set_inputs, training_set_outputs = trainig_data.xor_generator()
+    training_data = Data_Generator(int(0.8 * DATA_SIZE))
+    training_set_inputs, training_set_outputs = training_data.xor_generator()
     print(np.shape(training_set_inputs))
     # Training phase
     mse, mse_plot_array = neural_network.train(training_set_inputs, training_set_outputs, 1000, 0.1)
@@ -124,12 +118,12 @@ def main():
     neural_network.print_weights()
     print("\n-------------------------------\n")
 
-    #  Make a plot of the error versus training iterations
+  #  Make a plot of the error versus training iterations
     x_data = np.arange(1000)
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     ax.plot(x_data, mse_plot_array, 'r')
-    ax.set_title('MSE vs training iteration\n (Error sat method - alpha = 8, n = 4)')
+    ax.set_title('MSE vs training iteration\n Control')
     plt.show()
 
     # Test phase
