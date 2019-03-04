@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c1a4194-57c3-494d-acfe-4c4a51ea50c4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Control_ErrorSatNet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MNIST Fully Connected/.idea/libraries/R_User_Library.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MNIST Fully Connected/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MNIST Fully Connected/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Control_ErrorSatNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Control_ErrorSatNet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ErrorSatNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorSatNet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a16n4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/control.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,46 +17,64 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ErrorSatPrevention_v1" />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ErrorSatNet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="131" column="31" lean-forward="true" selection-start-line="131" selection-end-line="132" />
-              <folding>
-                <element signature="e#233#251#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Control_ErrorSatNet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="125" column="53" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
-              <folding>
-                <element signature="e#233#251#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2905">
-              <caret line="1719" column="34" lean-forward="true" selection-start-line="1719" selection-start-column="34" selection-end-line="1719" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.4954683">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Control_ErrorSatNet.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="160">
+                  <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ErrorSatNet.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="470">
+                  <caret line="66" column="53" lean-forward="true" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
+                  <folding>
+                    <element signature="e#233#251#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="310">
+                  <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-324">
+                  <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Sigmoid</find>
+      <find>random</find>
     </findStrings>
     <replaceStrings>
       <replace>sigmoi</replace>
@@ -65,8 +88,8 @@
       <list>
         <option value="$PROJECT_DIR$/NN_BP_draft.py" />
         <option value="$PROJECT_DIR$/venv/ClassReference.py" />
-        <option value="$PROJECT_DIR$/ErrorSatNet.py" />
         <option value="$PROJECT_DIR$/Control_ErrorSatNet.py" />
+        <option value="$PROJECT_DIR$/ErrorSatNet.py" />
       </list>
     </option>
   </component>
@@ -83,29 +106,11 @@
       <autoscrollFromSource ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ErrorSatPrevention_v1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ErrorSatPrevention_v1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ErrorSatPrevention_v1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ErrorSatPrevention_v1" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="ToolWindowDebug.ShowToolbar" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../CorGraphProject/DendriticLayer/V2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -273,21 +278,22 @@
     <frame x="-1" y="0" width="1368" height="768" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.18806647" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992743" weight="0.19033232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Favorites" order="2" sideWeight="0.5007257" side_tool="true" weight="0.18806647" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.28021148" side_tool="true" visible="true" weight="0.30624092" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.28021148" side_tool="true" weight="0.30478954" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7197885" weight="0.66182876" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32946298" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32872504" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4984375" weight="0.56458634" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4984375" weight="0.32656023" />
-      <window_info anchor="right" id="R Graphics" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3018868" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4984375" weight="0.4238026" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.4984375" visible="true" weight="0.29172716" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="right" id="R Graphics" order="0" weight="0.32930514" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="R Packages" order="2" />
       <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
@@ -340,11 +346,6 @@
           <line>113</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ErrorSatNet.py</url>
-          <line>120</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -357,13 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="50" column="69" selection-start-line="50" selection-start-column="69" selection-end-line="50" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/ClassReference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -373,25 +367,29 @@
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2905">
-          <caret line="1719" column="34" lean-forward="true" selection-start-line="1719" selection-start-column="34" selection-end-line="1719" selection-end-column="34" />
+        <state>
+          <caret line="1719" column="34" selection-start-line="1719" selection-start-column="34" selection-end-line="1719" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Control_ErrorSatNet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="125" column="53" selection-start-line="125" selection-start-column="53" selection-end-line="125" selection-end-column="53" />
-          <folding>
-            <element signature="e#233#251#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="160">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ErrorSatNet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="131" column="31" lean-forward="true" selection-start-line="131" selection-end-line="132" />
+        <state relative-caret-position="470">
+          <caret line="66" column="53" lean-forward="true" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
           <folding>
             <element signature="e#233#251#0" expanded="true" />
           </folding>

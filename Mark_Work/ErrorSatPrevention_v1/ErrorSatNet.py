@@ -10,6 +10,8 @@ import numpy as np
 import random
 from numpy import exp, array, random, dot
 import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def esp(alpha, out, n):
@@ -19,10 +21,11 @@ def esp(alpha, out, n):
 
 
 
-
 class NeuronLayer():
     def __init__(self, number_of_neurons, number_of_inputs_per_neuron):
-        self.synaptic_weights = 2 * random.random((number_of_inputs_per_neuron, number_of_neurons)) - 1
+        mu, sigma = 0, 1
+        # self.synaptic_weights = 2 * random.random((number_of_inputs_per_neuron, number_of_neurons)) - 1
+        self.synaptic_weights = sigma * random.randn(number_of_inputs_per_neuron, number_of_neurons) + mu
 
 
 class NeuralNetwork():
@@ -60,6 +63,7 @@ class NeuralNetwork():
 
             # Calculate the error for layer 2
             layer2_error = (training_set_outputs - output_from_layer_2) + esp(8, output_from_layer_2, 4)
+            # layer2_error = (training_set_outputs - output_from_layer_2)
             mse[iteration] = np.mean(layer2_error**2)
             layer2_delta = layer2_error * self.__sigmoid_derivative(output_from_layer_2)
 
@@ -98,6 +102,12 @@ class Data_Generator():
 def main():
     random.seed(1)
 
+    # Hyper Parameters
+    alpha, n = 0, 6
+    num_iter, num_epochs = 1000, 1
+    lr = 0.1
+
+
     # Create the first layer (4 neurons, each with 2 inputs)
     layer1 = NeuronLayer(4, 2)
 
@@ -111,26 +121,68 @@ def main():
     neural_network.print_weights()
     print("\n-------------------------------\n")
 
-    # Generate the training set
+    # # Generate the training set
     DATA_SIZE = 100
-    trainig_data = Data_Generator(int(0.8 * DATA_SIZE))
-    training_set_inputs, training_set_outputs = trainig_data.xor_generator()
-    print(np.shape(training_set_inputs))
+    training_data = Data_Generator(int(0.8 * DATA_SIZE))
+    training_set_inputs, training_set_outputs = training_data.xor_generator()
+    # print(np.shape(training_set_inputs))
     # Training phase
-    mse, mse_plot_array = neural_network.train(training_set_inputs, training_set_outputs, 1000, 0.1)
-    print("Mean Squared Error after training: " + str(mse))
-    #print(f"Stage 2) New weights after training: {neural_network.print_weights()}")
+    # training_set_inputs = np.array([
+    #     [0, 0],
+    #     [0, 1],
+    #     [1, 0],
+    #     [1, 1]
+    # ])
+    # training_set_outputs = np.array([[0], [1], [1], [0]])
+
+    mse_3d_data = []
+    for epoch in range(num_epochs):
+        mse, epoch_mse_info = neural_network.train(training_set_inputs, training_set_outputs, num_iter, lr)
+        mse_3d_data.append(epoch_mse_info.tolist())
+    mse_3d_data = np.array(mse_3d_data)
+
+        # mse_3d_data = np.insert(mse_3d_data, epoch, epoch_mse_info)
+        # print(epoch_mse_info)
+        # mse_3d_data[epoch] = epoch_mse_info
+    # print("Mean Squared Error after training: " + str(mse))
+    # print(f"Stage 2) New weights after training: {neural_network.print_weights()}")
+    #print(mse_3d_data)
+    #print(np.array(mse_3d_data))
+
+
     print("Stage 2) New weights after training: \n")
     neural_network.print_weights()
     print("\n-------------------------------\n")
 
-    #  Make a plot of the error versus training iterations
-    x_data = np.arange(1000)
-    fig = plt.figure()
-    ax = fig.add_subplot(1, 1, 1)
-    ax.plot(x_data, mse_plot_array, 'r')
-    ax.set_title('MSE vs training iteration\n (Error sat method - alpha = 8, n = 4)')
-    plt.show()
+    #  Make a 3d plot of the error versus training iterations and epoch
+    x_axis = np.arange(num_iter)
+    y_axis = np.arange(num_epochs)
+    # x_axis, y_axis, = np.meshgrid(x_axis, y_axis)
+    # print(x_axis.shape)
+    # print(y_axis.shape)
+    # print(mse_3d_data.shape)
+    # print(x_axis)
+    # print(y_axis)
+    print(mse_3d_data)
+    # print(np.transpose(mse_3d_data))
+
+    # fig = plt.figure()
+    # ax = Axes3D(fig)
+    # ax.plot_surface(x_axis, y_axis, mse_3d_data, rstride=1, cstride=1, cmap=cm.viridis)
+    # plt.show()
+
+    for i in range(num_epochs):
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
+        ax.plot(x_axis, mse_3d_data[i], 'r')
+        # axis(xmin, xmax, ymin, ymax)
+        plt.axis([0, num_iter, 0, 0.40])
+        plt.xlabel('Training iteration')
+        plt.ylabel('Error')
+        ax.set_title('MSE vs training iteration\n'
+                     ' (Error sat, alpha: %(val1)d, n: %(val2)d)'
+                     % {'val1': alpha, 'val2': n})
+        plt.show()
 
     # Test phase
     test_data = Data_Generator(int(0.2 * DATA_SIZE))

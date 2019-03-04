@@ -123,6 +123,9 @@ def main():
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     ax.plot(x_data, mse_plot_array, 'r')
+    # axis(xmin, xmax, ymin, ymax)
+    plt.axis([0, 1000, 0, 0.25])
+    plt.xlabel(['Iteration'])
     ax.set_title('MSE vs training iteration\n Control')
     plt.show()
 
