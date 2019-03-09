@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c1a4194-57c3-494d-acfe-4c4a51ea50c4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../MNIST Fully Connected/.idea/libraries/R_User_Library.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MNIST Fully Connected/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MNIST Fully Connected/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Control_ErrorSatNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/Control_ErrorSatNet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorSatNet.py" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorSatNet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a16n4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/control.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +29,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ErrorSatNet.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="470">
-                  <caret line="66" column="53" lean-forward="true" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
+                <state relative-caret-position="410">
+                  <caret line="66" column="53" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
                   <folding>
                     <element signature="e#233#251#0" expanded="true" />
                   </folding>
@@ -48,7 +41,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="310">
+                <state relative-caret-position="1040">
                   <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
                 </state>
               </provider>
@@ -57,11 +50,11 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-324">
+                <state relative-caret-position="20">
                   <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
                 </state>
               </provider>
@@ -93,8 +86,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="683" />
     <option name="width" value="684" />
     <option name="height" value="768" />
   </component>
@@ -110,7 +103,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ToolWindowDebug.ShowToolbar" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MNIST Fully Connected" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -262,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1551479530868</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Got Error Sat XOR network to the point where it can print error vs iteration graphs for any number of epochs. It also works for testing different values of alpha and n.">
+      <created>1551717476928</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1551717476928</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -275,8 +275,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="768" extended-state="6" />
-    <editor active="true" />
+    <frame x="683" y="0" width="684" height="768" extended-state="4" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992743" weight="0.19033232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -326,7 +325,8 @@
     <MESSAGE value="Completed modified XOR network for error saturation prevention and am now debugging." />
     <MESSAGE value="Updated Feb 27 meeting notes." />
     <MESSAGE value="Updated Error Sat's network to reflect changes made by Jian to the original XOR network" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Error Sat's network to reflect changes made by Jian to the original XOR network" />
+    <MESSAGE value="Got Error Sat XOR network to the point where it can print error vs iteration graphs for any number of epochs. It also works for testing different values of alpha and n." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got Error Sat XOR network to the point where it can print error vs iteration graphs for any number of epochs. It also works for testing different values of alpha and n." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -379,20 +379,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ErrorSatNet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="66" column="53" lean-forward="true" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
+        <state relative-caret-position="410">
+          <caret line="66" column="53" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
           <folding>
             <element signature="e#233#251#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../NN_BP/NN_BP_draft.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
         </state>
       </provider>
     </entry>
