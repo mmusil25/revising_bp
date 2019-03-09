@@ -7,6 +7,7 @@ Two Layer BP neural network - Draft
 """
 import numpy as np
 import random
+import matplotlib.pyplot as plt
 from numpy import exp, array, random, dot
 
 
@@ -66,7 +67,7 @@ class NeuralNetwork():
 class Data_Generator():
     def __init__(self, data_size=None):
         if data_size == None:
-            self.data_size = 100
+            self.data_size = 4
         else:
             self.data_size = data_size
     def xor_generator(self):
@@ -95,20 +96,30 @@ def main():
 
     # Generate the training set
     DATA_SIZE = 100
-    trainig_data = Data_Generator(int(0.8 * DATA_SIZE))
-    training_set_inputs, training_set_outputs = trainig_data.xor_generator()
+    # trainig_data = Data_Generator(int(0.8 * DATA_SIZE))
+    training_set_inputs = np.array([[0, 0], [0, 1], [1, 1], [1, 0]])
+    training_set_outputs = np.array([[0, 1, 0, 1]]).T
+    # training_set_inputs, training_set_outputs = trainig_data.xor_generator()
     print(np.shape(training_set_inputs))
     # Training phase
-    neural_network.train(training_set_inputs, training_set_outputs, 1000, 0.1)
+    neural_network.train(training_set_inputs, training_set_outputs, 1000, 1.0)
     print(f"Stage 2) New weights after training: {neural_network.print_weights()}")
 
     # Test phase
     test_data = Data_Generator(int(0.2 * DATA_SIZE))
     test_set_inputs, test_set_outputs = test_data.xor_generator()
+
+    plt.figure(figsize=(8,8))
+    marker = ['x', '^']
+    count = 0
     for ii in range(np.shape(test_set_inputs)[0]):
         _, output = neural_network.feed_forward(test_set_inputs[ii])
-        print(f"X1 = {test_set_inputs[ii, 0]}, X2 = {test_set_inputs[ii, 1]}")
-        print(f"True output = {test_set_outputs[ii]}, Prediction = {output}")
+        print(f"A = {test_set_inputs[ii, 0]}, B = {test_set_inputs[ii, 1]}")
+        print(f"True output = {test_set_outputs[ii]}, Prediction = {output}\n")
+        if output[0] - test_set_outputs[ii, 0] < 0.1:
+            count += 1
+    accuracy = count / np.shape(test_set_inputs)[0]
+    print(f"The accuracy of the test set is:{accuracy * 100} %")
 
 if __name__ == '__main__':
     main()
