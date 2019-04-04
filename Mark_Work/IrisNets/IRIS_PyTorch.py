@@ -23,7 +23,7 @@ from sklearn.model_selection import train_test_split
 df = pd.read_csv('./iris/iris.csv')
 # print(df.shape)
 y = df['species'].values
-X = df.drop(['species'],1).values
+X = df.drop(['species'], 1).values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15)
 print(y_test.shape)
 
