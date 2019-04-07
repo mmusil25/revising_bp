@@ -42,10 +42,11 @@ class PBP:
             self.network.logZ_Z1_Z2(self.x, self.y)
 
         # We create a theano function for updating the posterior
-
+        # print(['self.y pre-adf_update: ', self.y])
         self.adf_update = theano.function([ self.x, self.y ], self.logZ,
             updates = self.network.generate_updates(self.logZ, self.logZ1,
             self.logZ2))
+        # print(['self.y post-adf_update: ', self.y])
 
         # We greate a theano function for the network predictive distribution
 

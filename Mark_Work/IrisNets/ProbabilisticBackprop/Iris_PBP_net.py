@@ -29,13 +29,6 @@ y_train = np.asarray([data[4] for data in datatrain])
 X_test = np.asarray([data[:4] for data in datatest])
 y_test = np.asarray([data[4] for data in datatest])
 
-
-
-
-
-
-
-
 #********************* Old data import method
 # We load the boston housing dataset
 # data = np.loadtxt('../iris/iris.csv', delimiter=',')
@@ -69,7 +62,7 @@ net = PBP_net.PBP_net(X_train, y_train,
 # We make predictions for the test set
 
 m, v, v_noise = net.predict(X_test)
-
+print(["shape of m: ", m.shape])
 # We compute the test RMSE
 
 rmse = np.sqrt(np.mean((y_test - m)**2))

@@ -15,6 +15,7 @@ SECTION 1 : Load and setup data for training
 import csv
 import random
 import math
+import numpy as np
 
 random.seed(123)
 
@@ -111,6 +112,7 @@ for i in range(neuron[1]):
 
 for e in range(epoch):
     cost_total = 0
+    cost_for_graph = []
     for idx, x in enumerate(train_X):  # Update for each data; SGD
 
         # Forward propagation
@@ -128,6 +130,12 @@ for e in range(epoch):
         for i in range(3):
             eror += 0.5 * (target[i] - X_2[i]) ** 2
         cost_total += eror
+
+        # store cost_total for graphing
+        cost_for_graph.append(cost_total)
+
+
+
 
         # Backward propagation
         # Update weight_2 and bias_2 (layer 2)
@@ -149,11 +157,26 @@ for e in range(epoch):
             for j in range(neuron[1]):
                 weight[i][j] -= alfa * (delta_1[j] * x[i])
                 bias[j] -= alfa * delta_1[j]
-
+    cost_for_graph = np.array(cost_for_graph)
     cost_total /= len(train_X)
     if (e % 100 == 0):
         print("Epoch" , e/100, " out of ", epoch/100)
         print("Epoch cost: ", cost_total)
+# Plot error over time
+for i in range(num_epochs):
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.plot(x_axis, mse_3d_data[i], 'r')
+    # axis(xmin, xmax, ymin, ymax)
+    plt.axis([0, num_iter, 0, 0.40])
+    plt.xlabel('Training iteration')
+    plt.ylabel('Error')
+    ax.set_title('MSE vs training iteration\n'
+                 ' (Error sat, alpha: %(val1)d, n: %(val2)d)'
+                 % {'val1': alpha, 'val2': n})
+    plt.show()
+
+
 
 """
 SECTION 3 : Testing
