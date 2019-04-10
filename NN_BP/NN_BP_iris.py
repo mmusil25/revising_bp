@@ -1,14 +1,18 @@
 """
-ECE Capstone 2019
-Group 14
-Two Layer BP neural network - Draft
+Multi-Layer Neural Network iris classification
 
 @author: Jian Meng
+
+Project: Revised Backpropagation capstone
+
+Date: 03/17/2019
 """
+
 import numpy as np
 import random
-import matplotlib.pyplot as plt
 from numpy import exp, array, random, dot
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
 
 
 class NeuronLayer():
@@ -44,12 +48,6 @@ class NeuralNetwork():
         print("    Layer 2 (1 neuron, with 4 inputs):")
         print(self.layer2.synaptic_weights)
 
-    def layerErr(self, delta, weights):
-        dE = 0 
-        for ii in range(weights.shape[1]):
-            w = weights[:,ii].reshape(weights.shape[1], 1)
-            dE += delta.dot(w.T)
-        return dE
 
     # Neural Network Training phase
     def train(self, training_set_inputs, training_set_outputs, number_of_training_iterations, lr):
@@ -62,7 +60,6 @@ class NeuralNetwork():
             layer3_delta = layer3_error * self.__sigmoid_derivative(output_from_layer_3)
 
             # Calculate the error for layer 2
-            # layer2_error = self.layerErr(layer3_delta, self.layer3.synaptic_weights)
             layer2_error = layer3_delta.dot(self.layer3.synaptic_weights.T)
             layer2_delta = layer2_error * self.__sigmoid_derivative(output_from_layer_2)
 
@@ -80,62 +77,44 @@ class NeuralNetwork():
             self.layer2.synaptic_weights += lr * layer2_adjustment
             self.layer3.synaptic_weights += lr * layer3_adjustment
 
-class Data_Generator():
-    def __init__(self, data_size=None):
-        if data_size == None:
-            self.data_size = 4
-        else:
-            self.data_size = data_size
-    def xor_generator(self):
-        NN_input = np.zeros([self.data_size, 2])
-        NN_target = np.zeros([self.data_size, 1])
-        for ii in range(self.data_size):
-            x1 = int(random.uniform(0, 2, 1))
-            x2 = int(random.uniform(0, 2, 1))
-            out = int(bool(x1 ^ x2))
-            NN_input[ii, :] = np.array([x1, x2])
-            NN_target[ii] = out
-        return NN_input, NN_target    
-    
-def main():
-    random.seed(1)
 
-    # Create the first layer (4 neurons, each with 2 inputs)
-    layer1 = NeuronLayer(10, 2)
+def main():    
+# Fetch the data from the iris data set: 
+    iris = datasets.load_iris()
+    X = iris.data[:, :3]
+    Y = iris.target.reshape([150,1])
 
-    # Create the second layer (a single neuron with 4 inputs)
-    layer2 = NeuronLayer(10, 10)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
+# Create the first layer
+    layer1 = NeuronLayer(16, 3)
 
-    # Third layer
-    layer3 = NeuronLayer(1, 10)
-    # Combine the layers to create a neural network
+# Create the second layer
+    layer2 = NeuronLayer(16, 16)
+
+# Create tjhe third layer
+    layer3 = NeuronLayer(1, 16)
+
     neural_network = NeuralNetwork(layer1, layer2, layer3)
-    print (f"Randomly initialize weights: {neural_network.print_weights()}")
+    print ("Randomly initialize weights:")
+    neural_network.print_weights()
 
-    # Generate the training set
-    DATA_SIZE = 100
-    # trainig_data = Data_Generator(int(0.8 * DATA_SIZE))
-    training_set_inputs = array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    training_set_outputs = array([[0, 1, 1, 0]]).T
-    # training_set_inputs, training_set_outputs = trainig_data.xor_generator()
-    print(np.shape(training_set_inputs))
-    # Training phase
-    neural_network.train(training_set_inputs, training_set_outputs, 1000, 1.0)
-    print(f"Stage 2) New weights after training: {neural_network.print_weights()}")
+# Training Phase
+    neural_network.train(X_train, y_train, 1000, 0.8)
+    print("New weights after training:")
+    neural_network.print_weights()
 
-    # Test phase
-    test_data = Data_Generator(int(0.2 * DATA_SIZE))
-    test_set_inputs, test_set_outputs = test_data.xor_generator()
-
+# Test Phase
     count = 0
-    for ii in range(np.shape(test_set_inputs)[0]):
-        _, _, output = neural_network.feed_forward(test_set_inputs[ii])
-        print(f"A = {test_set_inputs[ii, 0]}, B = {test_set_inputs[ii, 1]}")
-        print(f"True output = {test_set_outputs[ii]}, Prediction = {output}\n")
-        if output[0] - test_set_outputs[ii, 0] < 0.1:
+    for ii in range(X_test.shape[0]):
+        _, _, output = neural_network.feed_forward(X_test[ii])
+        print(f"A = {X_test[ii, 0]}, B = {X_test[ii, 1]}, C = {X_test[ii, 2]}")
+        print(f"True output = {y_test[ii]}, Prediction = {output}\n")
+        if output[0] - y_test[ii, 0] < 0.1:
             count += 1
-    accuracy = count / np.shape(test_set_inputs)[0]
+    
+    accuracy = count / np.shape(X_test)[0]
     print(f"The accuracy of the test set is:{accuracy * 100} %")
+
 
 if __name__ == '__main__':
     main()

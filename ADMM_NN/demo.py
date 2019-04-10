@@ -1,6 +1,6 @@
 from sklearn.datasets import load_iris
 from admm_nn import ADMM_Net
-from torch_mlp import torch_mlp_demo
+# from torch_mlp import torch_mlp_demo
 import torch
 import numpy as np  
 
