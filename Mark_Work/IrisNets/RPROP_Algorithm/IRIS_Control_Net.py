@@ -132,11 +132,6 @@ for e in range(epoch):
             eror += 0.5 * (target[i] - X_2[i]) ** 2
         cost_total += eror
 
-
-
-
-
-
         # Backward propagation
         # Update weight_2 and bias_2 (layer 2)
         delta_2 = []
