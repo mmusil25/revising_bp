@@ -93,7 +93,7 @@ def sigmoid(A, deriv=False):
 
 # Define parameter
 alpha = 0.005
-epoch = 400
+epoch = 200
 neuron = [4, 5, 3]  # number of neuron each layer
 
 # Initiate weight and bias with 0 value
@@ -125,14 +125,17 @@ for e in range(epoch):
         # Convert to One-hot target
         target = [0, 0, 0]
         target[int(train_y[idx])] = 1
+        print(["target", target])
 
         # Cost function, Square Root Eror
-        eror = 0
-        for i in range(3):
-            eror += 0.5 * (target[i] - X_2[i]) ** 2
-        cost_total += eror
-
-
+        error = 0
+        for i in range(neuron[2]):
+            error += 0.5 * (target[i] - X_2[i]) ** 2
+            print(["target[i]", target[i]])
+            print(["train_y[i]", train_y[i]])
+            print(["X_2[i]", X_2[i]])
+            print(["error", error])
+        cost_total += error
 
 
 
@@ -160,25 +163,30 @@ for e in range(epoch):
 
     # store cost_total for graphing
     cost_total /= len(train_X)
+    print(["cost_total", cost_total])
     cost_for_graph.append(cost_total)
     if (e % 100 == 0):
         print("Epoch" , e/100, " out of ", epoch/100)
         print("Epoch cost: ", cost_total)
 
-
+print(["cost_for_graph", cost_for_graph])
+cost_for_graph = np.array(cost_for_graph)
+print(["cost_for_graph.shape: ", cost_for_graph.shape])
 
 
 
 """
 SECTION 3 : Testing
 """
-
+print(["test_X dimensions: ", np.asarray(test_X).shape])
 res = matrix_mul_bias(test_X, weight, bias)
+print(["len(res)", len(res)])
 res_2 = matrix_mul_bias(res, weight_2, bias)
-
+print(["len(res_2)", len(res_2)])
 # Get prediction
 preds = []
 for r in res_2:
+    print(["r", r])
     preds.append(max(enumerate(r), key=lambda x: x[1])[0])
 
 # Print prediction
@@ -198,8 +206,8 @@ SECTION 4 : Plotting
 """
 
 
-cost_for_graph = np.array(cost_for_graph)
-print(["cost_for_graph.shape: ", cost_for_graph.shape])
+# cost_for_graph = np.array(cost_for_graph)
+# print(["cost_for_graph.shape: ", cost_for_graph.shape])
 # Plot error over time
 x_axis = np.arange(epoch)
 #for i in range(epoch):
@@ -207,7 +215,7 @@ fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
 ax.plot(x_axis, cost_for_graph, 'r')
 # axis(xmin, xmax, ymin, ymax)
-plt.axis([0, epoch, 0, 0.40])
+plt.axis([0, epoch, 0, 0.50])
 plt.xlabel('Training iteration')
 plt.ylabel('Error')
 ax.set_title('MSE vs training iteration\n '

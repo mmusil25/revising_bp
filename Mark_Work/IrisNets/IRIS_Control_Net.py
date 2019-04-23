@@ -93,7 +93,7 @@ def sigmoid(A, deriv=False):
 
 # Define parameter
 alfa = 0.005
-epoch = 20000
+epoch = 200
 neuron = [4, 5, 3]  # number of neuron each layer
 
 # Initiate weight and bias with 0 value
@@ -194,9 +194,11 @@ res_2 = matrix_mul_bias(res, weight_2, bias)
 # Get prediction
 preds = []
 for r in res_2:
+    
     preds.append(max(enumerate(r), key=lambda x: x[1])[0])
 
 # Print prediction
+
 print("Predictions: ", preds)
 
 # Calculate accuration
