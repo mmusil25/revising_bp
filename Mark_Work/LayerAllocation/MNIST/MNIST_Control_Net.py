@@ -25,15 +25,15 @@ mnist.init()
 
 random.seed(123)
 
-partition1 = 10
-partition2 = 5
+partition1 = 100
+partition2 = 20
 
 # Load dataset
 
 train_X, train_y, test_X, test_y = mnist.load()
-print(["train_X, train_y, test_X, test_y", train_X.shape, train_y.shape, test_X.shape, test_y.shape])
+# print(["train_X, train_y, test_X, test_y", train_X.shape, train_y.shape, test_X.shape, test_y.shape])
 train_X, train_y, test_X, test_y = train_X[0:partition1], train_y[0:partition1], test_X[0:partition2], test_y[0:partition2]
-print(["train_X, train_y, test_X, test_y", train_X.shape, train_y.shape, test_X.shape, test_y.shape])
+# print(["train_X, train_y, test_X, test_y", train_X.shape, train_y.shape, test_X.shape, test_y.shape])
 # with open('./iris/iris.csv') as csvfile:
 #     csvreader = csv.reader(csvfile)
 #     next(csvreader, None)  # skip header
@@ -46,18 +46,18 @@ print(["train_X, train_y, test_X, test_y", train_X.shape, train_y.shape, test_X.
 #
 
 # # Change digit value to numeric
-print(["train_y.shape: ",train_y.shape])
+# print(["train_y.shape: ",train_y.shape])
 train_y_onehot = np.zeros((train_y.shape[0], 10))
-print(["train_y_onehot.shape: ",train_y_onehot.shape])
+# print(["train_y_onehot.shape: ",train_y_onehot.shape])
 for i in range(train_y.shape[0]):
      for j in range(10):
          if (j == train_y[i]):
             train_y_onehot[i][j] = 1
 train_y = train_y_onehot
 
-print(["test_y.shape: ",test_y.shape])
+# print(["test_y.shape: ",test_y.shape])
 test_y_onehot = np.zeros((test_y.shape[0], 10))
-print(["test_y_onehot.shape: ",test_y_onehot.shape])
+# print(["test_y_onehot.shape: ",test_y_onehot.shape])
 for i in range(test_y.shape[0]):
      for j in range(10):
          if (j == test_y[i]):
@@ -128,7 +128,8 @@ def sigmoid(A, deriv=False):
     return A
 
 
-# Define parameter
+# Define hyper parameters
+trial_num = 1
 alpha = 0.005
 epoch = 10
 neuron = [784, 30, 10]  # number of neuron each layer
@@ -150,18 +151,18 @@ for i in range(neuron[1]):
 
 cost_for_graph = []
 for e in range(epoch):
-    print(["Sub_Epoch: ", e])
+    # print(["Sub_Epoch: ", e])
     cost_total = 0
     for idx, x in enumerate(train_X):  # Update for each data; SGD
-        print(["x", x])
-        print(["idx", idx])
+        # print(["x", x])
+        # print(["idx", idx])
         # Forward propagation
         h_1 = vec_mat_bias(x, weight, bias)
         X_1 = sigmoid(np.clip(h_1, -500, 500))
         h_2 = vec_mat_bias(X_1, weight_2, bias_2)
         X_2 = sigmoid(h_2)
         #print(["X_2 dimensions", np.asarray(X_2).shape])
-        print(["X_2", X_2])
+        # print(["X_2", X_2])
         # Convert to One-hot target
         # target = [0, 0, 0]
         # target[int(train_y[idx])] = 1
@@ -171,9 +172,9 @@ for e in range(epoch):
         for i in range(3):
             error += 0.5 * (train_y[idx][i] - X_2[i]) ** 2
             # print(["target[i]", target[i]])
-            print(["train_y[idx][i]", train_y[idx][i]])
-            print(["X_2[i]", X_2[i]])
-            print(["error", error])
+            # print(["train_y[idx][i]", train_y[idx][i]])
+            # print(["X_2[i]", X_2[i]])
+            # print(["error", error])
         cost_total += error
 
         # Backward propagation
@@ -201,7 +202,7 @@ for e in range(epoch):
     cost_total /= partition1  # partition1 = len(train_X)
     print(["cost_total", cost_total])
     cost_for_graph.append(cost_total)
-    interval = 1
+    interval = 5
     if (e % interval == 0):
         print("Epoch" , e/interval, " out of ", epoch/interval)
         print("Epoch cost: ", cost_total)
@@ -209,7 +210,7 @@ for e in range(epoch):
 
 print(["cost_for_graph", cost_for_graph])
 cost_for_graph = np.array(cost_for_graph)
-print(["cost_for_graph.shape: ", cost_for_graph.shape])
+# print(["cost_for_graph.shape: ", cost_for_graph.shape])
 
 
 
@@ -277,4 +278,6 @@ ax.set_title('MSE vs training iteration\n '
              'Network Accurary = %6.3f %% Alpha = %6.3f' % (netAcc, alpha))
 #             ' (Error sat, alpha: %(val1)d, n: %(val2)d)'
 #             % {'val1': alpha, 'val2': n})
-plt.show()
+# plt.show()
+fname = "trial" + str(trial_num) + ".png" 
+plt.show(fname)
