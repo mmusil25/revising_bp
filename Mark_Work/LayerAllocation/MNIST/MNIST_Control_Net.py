@@ -131,8 +131,15 @@ def sigmoid(A, deriv=False):
 # Define hyper parameters
 trial_num = 1
 alpha = 0.005
-epoch = 10
+epoch = 50
 neuron = [784, 30, 10]  # number of neuron each layer
+write_out_name = "Trial" + str(trial_num) + ".txt"
+
+f = open(write_out_name, "w+")
+f.write(" alpha: %.4f, epoch: %d \n" % (alpha, epoch))
+f.write(" neuron[0]: %d, neuron[1]: %d, neuron[2]: %d \n" %(neuron[0],
+neuron[1], neuron[2]))
+f.write("\n ##### Begin Training Input #####")
 
 # Initiate weight and bias with 0 value
 weight = [[0 for j in range(neuron[1])] for i in range(neuron[0])]
@@ -200,13 +207,14 @@ for e in range(epoch):
 
     # store cost_total for graphing
     cost_total /= partition1  # partition1 = len(train_X)
-    print(["cost_total", cost_total])
+    # print(["cost_total", cost_total])
     cost_for_graph.append(cost_total)
     interval = 5
     if (e % interval == 0):
         print("Epoch" , e/interval, " out of ", epoch/interval)
         print("Epoch cost: ", cost_total)
-
+        f.write("Epoch %.4f out of %.4f " % (e/interval, epoch/interval))
+        f.write("Epoch cost: .4f " % cost_total)
 
 print(["cost_for_graph", cost_for_graph])
 cost_for_graph = np.array(cost_for_graph)
@@ -236,7 +244,7 @@ for i in range(partition2):
     #print(["X_2", X_2])
     preds.append(max)
 
-#print(["preds", preds])
+# print(["preds", preds])
 
 # for r in res_2:
 #     print(["len(r)", len(r)])
@@ -247,7 +255,11 @@ for i in range(partition2):
 
 # Print prediction
 print("Predictions: ", preds)
-
+f.write("Predictions: \n")
+f.write("[ ")
+for i in range(len(preds)):
+	f.write("%d, " % preds[i])
+f.write(" ]")
 # Calculate accuration
 acc = 0.0
 for i in range(len(preds)):
@@ -255,7 +267,7 @@ for i in range(len(preds)):
         acc += 1
     netAcc = acc / len(preds) * 100
 print("Network Accuracy: ", netAcc, "%")
-
+f.write("Network Accuracy: %.4f %%" % netAcc)
 
 """
 SECTION 4 : Plotting
@@ -280,4 +292,4 @@ ax.set_title('MSE vs training iteration\n '
 #             % {'val1': alpha, 'val2': n})
 # plt.show()
 fname = "trial" + str(trial_num) + ".png" 
-plt.show(fname)
+plt.savefig(fname)
