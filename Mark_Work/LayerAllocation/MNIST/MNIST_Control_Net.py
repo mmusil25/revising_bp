@@ -162,6 +162,7 @@ for e in range(epoch):
         X_2 = sigmoid(h_2)
         #print(["X_2 dimensions", np.asarray(X_2).shape])
         print(["X_2", X_2])
+
         # Convert to One-hot target
         # target = [0, 0, 0]
         # target[int(train_y[idx])] = 1
@@ -206,13 +207,9 @@ for e in range(epoch):
         print("Epoch" , e/interval, " out of ", epoch/interval)
         print("Epoch cost: ", cost_total)
 
-
 print(["cost_for_graph", cost_for_graph])
 cost_for_graph = np.array(cost_for_graph)
 print(["cost_for_graph.shape: ", cost_for_graph.shape])
-
-
-
 
 """
 SECTION 3 : Testing

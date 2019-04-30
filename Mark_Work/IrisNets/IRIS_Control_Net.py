@@ -118,7 +118,7 @@ for e in range(epoch):
 
         # Forward propagation
         h_1 = vec_mat_bias(x, weight, bias)
-        X_1 = sigmoid(h_1)
+        X_1 = sigmoid(np.clip(h_1, -500, 500))
         h_2 = vec_mat_bias(X_1, weight_2, bias_2)
         X_2 = sigmoid(h_2)
 
@@ -132,13 +132,9 @@ for e in range(epoch):
             eror += 0.5 * (target[i] - X_2[i]) ** 2
         cost_total += eror
 
-
-
-
-
-
         # Backward propagation
         # Update weight_2 and bias_2 (layer 2)
+        
         delta_2 = []
         for j in range(neuron[2]):
             delta_2.append(-1 * (target[j] - X_2[j]) * X_2[j] * (1 - X_2[j]))
@@ -181,7 +177,6 @@ plt.ylabel('Error')
 #             ' (Error sat, alpha: %(val1)d, n: %(val2)d)'
 #             % {'val1': alpha, 'val2': n})
 plt.show()
-
 
 
 """
