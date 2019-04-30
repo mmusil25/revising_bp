@@ -25,7 +25,7 @@ mnist.init()
 
 random.seed(123)
 
-partition1 = 100
+partition1 = 80
 partition2 = 20
 
 # Load dataset
@@ -131,7 +131,7 @@ def sigmoid(A, deriv=False):
 # Define hyper parameters
 trial_num = 1
 alpha = 0.005
-epoch = 50
+epoch = 30
 neuron = [784, 30, 10]  # number of neuron each layer
 write_out_name = "Trial" + str(trial_num) + ".txt"
 
@@ -139,7 +139,7 @@ f = open(write_out_name, "w+")
 f.write(" alpha: %.4f, epoch: %d \n" % (alpha, epoch))
 f.write(" neuron[0]: %d, neuron[1]: %d, neuron[2]: %d \n" %(neuron[0],
 neuron[1], neuron[2]))
-f.write("\n ##### Begin Training Input #####")
+f.write("\n ##### Begin Training Input ##### \n ")
 
 # Initiate weight and bias with 0 value
 weight = [[0 for j in range(neuron[1])] for i in range(neuron[0])]
@@ -213,8 +213,8 @@ for e in range(epoch):
     if (e % interval == 0):
         print("Epoch" , e/interval, " out of ", epoch/interval)
         print("Epoch cost: ", cost_total)
-        f.write("Epoch %.4f out of %.4f " % (e/interval, epoch/interval))
-        f.write("Epoch cost: .4f " % cost_total)
+        f.write("Epoch %.4f out of %.4f \n " % (e/interval, epoch/interval))
+        f.write("Epoch cost: %.4f \n " % cost_total)
 
 print(["cost_for_graph", cost_for_graph])
 cost_for_graph = np.array(cost_for_graph)
@@ -282,7 +282,7 @@ fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
 ax.plot(x_axis, cost_for_graph, 'r')
 # axis(xmin, xmax, ymin, ymax)
-plt.axis([0, epoch, 0, 1.30])
+plt.axis([0, epoch, 0, 2.0])
 plt.xlabel('Training iteration')
 plt.ylabel('Error')
 ax.set_title('MSE vs training iteration\n '
