@@ -92,6 +92,7 @@ def sigmoid(A, deriv=False):
 
 
 # Define parameter
+trial_num = "Test"
 alfa = 0.005
 epoch = 400
 layer1_coeff = 3
@@ -205,4 +206,5 @@ ax.set_title('MSE vs training iteration\n'
              ' Test Accuracy: %(val1)5.3f %% alpha: %(val2)5.3f\n'
              ' Layer 1 Coeff: %(val3)5.3f Layer 2 Coeff: %(val4)5.3f'
              % {'val1': netAcc, 'val2': alfa, 'val3': layer1_coeff, 'val4': layer2_coeff})
-plt.show()
+fname = "trial" + str(trial_num) + ".png" 
+plt.savefig(fname)

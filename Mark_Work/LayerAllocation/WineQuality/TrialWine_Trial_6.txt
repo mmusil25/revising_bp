@@ -1,0 +1,44 @@
+ Training sample count: 3918, Test sample count: 980 alpha: 0.0100, epoch: 200 
+ neuron[0]: 11, neuron[1]: 10, neuron[2]: 10 
+ Layer 1 Coefficient: 0.5000, Layer 2 Coefficient: 0.2500, Layer 3 Coefficient: 0.1250###### Begin Training Output ###### 
+Epoch 0.0 out of 20.0
+Epoch cost: 0.36409 
+Epoch 1.0 out of 20.0
+Epoch cost: 0.33133 
+Epoch 2.0 out of 20.0
+Epoch cost: 0.32292 
+Epoch 3.0 out of 20.0
+Epoch cost: 0.31515 
+Epoch 4.0 out of 20.0
+Epoch cost: 0.30945 
+Epoch 5.0 out of 20.0
+Epoch cost: 0.30543 
+Epoch 6.0 out of 20.0
+Epoch cost: 0.30266 
+Epoch 7.0 out of 20.0
+Epoch cost: 0.30079 
+Epoch 8.0 out of 20.0
+Epoch cost: 0.29950 
+Epoch 9.0 out of 20.0
+Epoch cost: 0.29848 
+Epoch 10.0 out of 20.0
+Epoch cost: 0.29759 
+Epoch 11.0 out of 20.0
+Epoch cost: 0.29673 
+Epoch 12.0 out of 20.0
+Epoch cost: 0.29592 
+Epoch 13.0 out of 20.0
+Epoch cost: 0.29517 
+Epoch 14.0 out of 20.0
+Epoch cost: 0.29450 
+Epoch 15.0 out of 20.0
+Epoch cost: 0.29389 
+Epoch 16.0 out of 20.0
+Epoch cost: 0.29331 
+Epoch 17.0 out of 20.0
+Epoch cost: 0.29276 
+Epoch 18.0 out of 20.0
+Epoch cost: 0.29225 
+Epoch 19.0 out of 20.0
+Epoch cost: 0.29176 
+Network Accuracy: 2.7551##### End of file #####

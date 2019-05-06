@@ -129,7 +129,7 @@ def sigmoid(A, deriv=False):
 
 
 # Define hyper parameters
-trial_num = 1
+trial_num = "Test"
 alpha = 0.005
 epoch = 30
 neuron = [784, 30, 10]  # number of neuron each layer

@@ -1,0 +1,104 @@
+ Training sample count: 3918, Test sample count: 980 alpha: 0.0050, epoch: 500 
+ neuron[0]: 11, neuron[1]: 20, neuron[2]: 20 
+###### Begin Training Output ###### 
+Epoch 0.0 out of 50.0
+Epoch cost: 0.35623 
+Epoch 1.0 out of 50.0
+Epoch cost: 0.32610 
+Epoch 2.0 out of 50.0
+Epoch cost: 0.31857 
+Epoch 3.0 out of 50.0
+Epoch cost: 0.31550 
+Epoch 4.0 out of 50.0
+Epoch cost: 0.31340 
+Epoch 5.0 out of 50.0
+Epoch cost: 0.31173 
+Epoch 6.0 out of 50.0
+Epoch cost: 0.31031 
+Epoch 7.0 out of 50.0
+Epoch cost: 0.30903 
+Epoch 8.0 out of 50.0
+Epoch cost: 0.30785 
+Epoch 9.0 out of 50.0
+Epoch cost: 0.30675 
+Epoch 10.0 out of 50.0
+Epoch cost: 0.30574 
+Epoch 11.0 out of 50.0
+Epoch cost: 0.30480 
+Epoch 12.0 out of 50.0
+Epoch cost: 0.30393 
+Epoch 13.0 out of 50.0
+Epoch cost: 0.30312 
+Epoch 14.0 out of 50.0
+Epoch cost: 0.30238 
+Epoch 15.0 out of 50.0
+Epoch cost: 0.30169 
+Epoch 16.0 out of 50.0
+Epoch cost: 0.30104 
+Epoch 17.0 out of 50.0
+Epoch cost: 0.30043 
+Epoch 18.0 out of 50.0
+Epoch cost: 0.29985 
+Epoch 19.0 out of 50.0
+Epoch cost: 0.29930 
+Epoch 20.0 out of 50.0
+Epoch cost: 0.29876 
+Epoch 21.0 out of 50.0
+Epoch cost: 0.29825 
+Epoch 22.0 out of 50.0
+Epoch cost: 0.29774 
+Epoch 23.0 out of 50.0
+Epoch cost: 0.29725 
+Epoch 24.0 out of 50.0
+Epoch cost: 0.29677 
+Epoch 25.0 out of 50.0
+Epoch cost: 0.29630 
+Epoch 26.0 out of 50.0
+Epoch cost: 0.29583 
+Epoch 27.0 out of 50.0
+Epoch cost: 0.29538 
+Epoch 28.0 out of 50.0
+Epoch cost: 0.29493 
+Epoch 29.0 out of 50.0
+Epoch cost: 0.29448 
+Epoch 30.0 out of 50.0
+Epoch cost: 0.29404 
+Epoch 31.0 out of 50.0
+Epoch cost: 0.29361 
+Epoch 32.0 out of 50.0
+Epoch cost: 0.29318 
+Epoch 33.0 out of 50.0
+Epoch cost: 0.29276 
+Epoch 34.0 out of 50.0
+Epoch cost: 0.29235 
+Epoch 35.0 out of 50.0
+Epoch cost: 0.29194 
+Epoch 36.0 out of 50.0
+Epoch cost: 0.29154 
+Epoch 37.0 out of 50.0
+Epoch cost: 0.29114 
+Epoch 38.0 out of 50.0
+Epoch cost: 0.29075 
+Epoch 39.0 out of 50.0
+Epoch cost: 0.29037 
+Epoch 40.0 out of 50.0
+Epoch cost: 0.28999 
+Epoch 41.0 out of 50.0
+Epoch cost: 0.28961 
+Epoch 42.0 out of 50.0
+Epoch cost: 0.28924 
+Epoch 43.0 out of 50.0
+Epoch cost: 0.28886 
+Epoch 44.0 out of 50.0
+Epoch cost: 0.28849 
+Epoch 45.0 out of 50.0
+Epoch cost: 0.28812 
+Epoch 46.0 out of 50.0
+Epoch cost: 0.28775 
+Epoch 47.0 out of 50.0
+Epoch cost: 0.28738 
+Epoch 48.0 out of 50.0
+Epoch cost: 0.28700 
+Epoch 49.0 out of 50.0
+Epoch cost: 0.28663 
+Network Accuracy: 8.0612##### End of file #####

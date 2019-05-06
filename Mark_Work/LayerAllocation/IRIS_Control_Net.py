@@ -17,11 +17,12 @@ import random
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 random.seed(123)
 
 # Load dataset
-with open('./iris/iris.csv') as csvfile:
+with open('../iris/iris.csv') as csvfile:
     csvreader = csv.reader(csvfile)
     next(csvreader, None)  # skip header
     dataset = list(csvreader)
@@ -92,9 +93,18 @@ def sigmoid(A, deriv=False):
 
 
 # Define parameter
-alpha = 0.005
-epoch = 200
-neuron = [4, 5, 3]  # number of neuron each layer
+trial_num = sys.argv[1] #"Test"
+alfa = float(sys.argv[2]) # 0.005
+alpha = alfa
+epoch = int(sys.argv[3]) # 40
+#neuron = [4, 5, 3]  # number of neuron each layer
+write_out_name = "Trial" + str(trial_num) + ".txt"
+f = open(write_out_name, "w+")
+f.write(" Training sample count: %d, Test sample count: %d" % (len(train_X), len(test_X)))
+f.write(" alpha: %.4f, epoch: %d \n" % (alpha, epoch))
+f.write(" neuron[0]: %d, neuron[1]: %d, neuron[2]: %d \n" % (neuron[0], neuron[1], neuron[2]))
+f.write("###### Begin Training Output ###### \n")
+
 
 # Initiate weight and bias with 0 value
 weight = [[0 for j in range(neuron[1])] for i in range(neuron[0])]
@@ -125,16 +135,16 @@ for e in range(epoch):
         # Convert to One-hot target
         target = [0, 0, 0]
         target[int(train_y[idx])] = 1
-        print(["target", target])
+        # print(["target", target])
 
         # Cost function, Square Root Eror
         error = 0
         for i in range(neuron[2]):
             error += 0.5 * (target[i] - X_2[i]) ** 2
-            print(["target[i]", target[i]])
-            print(["train_y[i]", train_y[i]])
-            print(["X_2[i]", X_2[i]])
-            print(["error", error])
+        #    print(["target[i]", target[i]])
+        #    print(["train_y[i]", train_y[i]])
+        #    print(["X_2[i]", X_2[i]])
+        #    print(["error", error])
         cost_total += error
 
 
@@ -165,32 +175,36 @@ for e in range(epoch):
     cost_total /= len(train_X)
     print(["cost_total", cost_total])
     cost_for_graph.append(cost_total)
-    if (e % 100 == 0):
-        print("Epoch" , e/100, " out of ", epoch/100)
+    interval = 10
+    if (e % interval == 0):
+        print("Epoch" , e/interval, " out of ", epoch/interval)
         print("Epoch cost: ", cost_total)
+        f.write("Epoch " + str(e/interval) + " out of " + str(epoch/interval) + "\n")
+        f.write("Epoch cost: %.5f \n" % cost_total)
 
-print(["cost_for_graph", cost_for_graph])
+
+#print(["cost_for_graph", cost_for_graph])
 cost_for_graph = np.array(cost_for_graph)
-print(["cost_for_graph.shape: ", cost_for_graph.shape])
+#print(["cost_for_graph.shape: ", cost_for_graph.shape])
 
 
 
 """
 SECTION 3 : Testing
 """
-print(["test_X dimensions: ", np.asarray(test_X).shape])
+#print(["test_X dimensions: ", np.asarray(test_X).shape])
 res = matrix_mul_bias(test_X, weight, bias)
-print(["len(res)", len(res)])
+#print(["len(res)", len(res)])
 res_2 = matrix_mul_bias(res, weight_2, bias)
-print(["len(res_2)", len(res_2)])
+#print(["len(res_2)", len(res_2)])
 # Get prediction
 preds = []
 for r in res_2:
-    print(["r", r])
+    #print(["r", r])
     preds.append(max(enumerate(r), key=lambda x: x[1])[0])
 
 # Print prediction
-print("Predictions: ", preds)
+#print("Predictions: ", preds)
 
 # Calculate accuration
 acc = 0.0
@@ -199,7 +213,8 @@ for i in range(len(preds)):
         acc += 1
     netAcc = acc / len(preds) * 100
 print("Network Accuracy: ", netAcc, "%")
-
+f.write("Network Accuracy: %.4f" % (acc / len(preds) * 100) )
+f.write("##### End of file #####")
 
 """
 SECTION 4 : Plotting
@@ -223,4 +238,5 @@ ax.set_title('MSE vs training iteration\n '
              'Network Accurary = %6.3f %% Alpha = %6.3f' % (netAcc, alpha))
 #             ' (Error sat, alpha: %(val1)d, n: %(val2)d)'
 #             % {'val1': alpha, 'val2': n})
-plt.show()
+fname = "trial" + str(trial_num) + ".png" 
+plt.savefig(fname)

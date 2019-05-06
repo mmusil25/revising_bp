@@ -17,11 +17,12 @@ import random
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 random.seed(123)
 
 # Load dataset
-with open('./iris/iris.csv') as csvfile:
+with open('../iris/iris.csv') as csvfile:
     csvreader = csv.reader(csvfile)
     next(csvreader, None)  # skip header
     dataset = list(csvreader)
@@ -39,10 +40,6 @@ train_X = [data[:4] for data in datatrain]
 train_y = [data[4] for data in datatrain]
 test_X = [data[:4] for data in datatest]
 test_y = [data[4] for data in datatest]
-
-partition1 = 2
-partition2 = 2
-train_X, train_y, test_X, test_y = train_X[0:partition1], train_y[0:partition1], test_X[0:partition2], test_y[0:partition2]
 
 """
 SECTION 2 : Build and Train Model
@@ -96,9 +93,20 @@ def sigmoid(A, deriv=False):
 
 
 # Define parameter
-alfa = 0.005
-epoch = 1 # default: 200
+layer_1_coeff = float(sys.argv[4]) #3
+layer_2_coeff = layer_1_coeff/2
+trial_num = sys.argv[1] #"Test"
+alpha = float(sys.argv[2]) # 0.005
+epoch = int(sys.argv[3]) # 40
 neuron = [4, 5, 3]  # number of neuron each layer
+write_out_name = "Trial" + str(trial_num) + ".txt"
+f = open(write_out_name, "w+")
+f.write(" Training sample count: %d, Test sample count: %d" % (len(train_X), len(test_X)))
+f.write(" alpha: %.4f, epoch: %d \n" % (alpha, epoch))
+f.write(" neuron[0]: %d, neuron[1]: %d, neuron[2]: %d \n" % (neuron[0], neuron[1], neuron[2]))
+f.write(" Layer 1 Coefficient: %.4f, Layer 2 Coefficient: %.4f" % (layer_1_coeff, layer_2_coeff))
+f.write("###### Begin Training Output ###### \n")
+
 
 # Initiate weight and bias with 0 value
 weight = [[0 for j in range(neuron[1])] for i in range(neuron[0])]
@@ -111,76 +119,112 @@ for i in range(neuron[0]):
     for j in range(neuron[1]):
         weight[i][j] = 2 * random.random() - 1
 
-print(["weight: ", weight])
-
 for i in range(neuron[1]):
     for j in range(neuron[2]):
         weight_2[i][j] = 2 * random.random() - 1
 
 cost_for_graph = []
 for e in range(epoch):
-    print(["Epoch: ", epoch])
     cost_total = 0
     for idx, x in enumerate(train_X):  # Update for each data; SGD
 
-        print(["idx: ", idx])
-        print(["x: ", x])
-        
         # Forward propagation
         h_1 = vec_mat_bias(x, weight, bias)
-        print(["h_1", h_1])
-        X_1 = sigmoid(np.clip(h_1, -500, 500))
-        print(["X_1", X_1])
+        X_1 = sigmoid(h_1)
         h_2 = vec_mat_bias(X_1, weight_2, bias_2)
-        print(["h_2", h_2])
         X_2 = sigmoid(h_2)
-        print(["X_2", X_2])
-        print(["y", train_y[idx]])
-        
+
         # Convert to One-hot target
         target = [0, 0, 0]
         target[int(train_y[idx])] = 1
+        # print(["target", target])
 
         # Cost function, Square Root Eror
-        eror = 0
-        for i in range(3):
-            eror += 0.5 * (target[i] - X_2[i]) ** 2
-        cost_total += eror
+        error = 0
+        for i in range(neuron[2]):
+            error += 0.5 * (target[i] - X_2[i]) ** 2
+        #    print(["target[i]", target[i]])
+        #    print(["train_y[i]", train_y[i]])
+        #    print(["X_2[i]", X_2[i]])
+        #    print(["error", error])
+        cost_total += error
+
+
+
 
         # Backward propagation
         # Update weight_2 and bias_2 (layer 2)
-        
         delta_2 = []
         for j in range(neuron[2]):
             delta_2.append(-1 * (target[j] - X_2[j]) * X_2[j] * (1 - X_2[j]))
 
         for i in range(neuron[1]):
             for j in range(neuron[2]):
-                weight_2[i][j] -= alfa * (delta_2[j] * X_1[i])
-                bias_2[j] -= alfa * delta_2[j]
-        print(["weight_2: ", weight_2])
-        print(["bias_2: ", bias_2])
-        
+                weight_2[i][j] -= alpha * (delta_2[j] * X_1[i]) * layer_2_coeff
+                bias_2[j] -= alpha * delta_2[j] * layer_2_coeff
+
         # Update weight and bias (layer 1)
         delta_1 = mat_vec(weight_2, delta_2)
         for j in range(neuron[1]):
             delta_1[j] = delta_1[j] * (X_1[j] * (1 - X_1[j]))
-              
+
         for i in range(neuron[0]):
             for j in range(neuron[1]):
-                weight[i][j] -= alfa * (delta_1[j] * x[i])
-                bias[j] -= alfa * delta_1[j]
-        print(["weight: ", weight])
-        print(["bias: ", bias])
+                weight[i][j] -= alpha * (delta_1[j] * x[i]) * layer_1_coeff
+                bias[j] -= alpha * delta_1[j] * layer_1_coeff
+
     # store cost_total for graphing
     cost_total /= len(train_X)
+    print(["cost_total", cost_total])
     cost_for_graph.append(cost_total)
-    if (e % 100 == 0):
-        print("Epoch" , e/100, " out of ", epoch/100)
+    interval = 10
+    if (e % interval == 0):
+        print("Epoch" , e/interval, " out of ", epoch/interval)
         print("Epoch cost: ", cost_total)
+        f.write("Epoch " + str(e/interval) + " out of " + str(epoch/interval) + "\n")
+        f.write("Epoch cost: %.5f \n" % cost_total)
 
+
+#print(["cost_for_graph", cost_for_graph])
 cost_for_graph = np.array(cost_for_graph)
-print(["cost_for_graph.shape: ", cost_for_graph.shape])
+#print(["cost_for_graph.shape: ", cost_for_graph.shape])
+
+
+
+"""
+SECTION 3 : Testing
+"""
+#print(["test_X dimensions: ", np.asarray(test_X).shape])
+res = matrix_mul_bias(test_X, weight, bias)
+#print(["len(res)", len(res)])
+res_2 = matrix_mul_bias(res, weight_2, bias)
+#print(["len(res_2)", len(res_2)])
+# Get prediction
+preds = []
+for r in res_2:
+    #print(["r", r])
+    preds.append(max(enumerate(r), key=lambda x: x[1])[0])
+
+# Print prediction
+#print("Predictions: ", preds)
+
+# Calculate accuration
+acc = 0.0
+for i in range(len(preds)):
+    if preds[i] == int(test_y[i]):
+        acc += 1
+    netAcc = acc / len(preds) * 100
+print("Network Accuracy: ", netAcc, "%")
+f.write("Network Accuracy: %.4f" % (acc / len(preds) * 100) )
+f.write("##### End of file #####")
+
+"""
+SECTION 4 : Plotting
+"""
+
+
+# cost_for_graph = np.array(cost_for_graph)
+# print(["cost_for_graph.shape: ", cost_for_graph.shape])
 # Plot error over time
 x_axis = np.arange(epoch)
 #for i in range(epoch):
@@ -188,36 +232,13 @@ fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
 ax.plot(x_axis, cost_for_graph, 'r')
 # axis(xmin, xmax, ymin, ymax)
-plt.axis([0, epoch, 0, 0.40])
+plt.axis([0, epoch, 0, 0.50])
 plt.xlabel('Training iteration')
 plt.ylabel('Error')
-#ax.set_title('MSE vs training iteration\n'
+ax.set_title('MSE vs training iteration\n '
+             'Layer Error Alloc. Control \n'
+             'Network Accurary = %6.3f %% Alpha = %6.3f' % (netAcc, alpha))
 #             ' (Error sat, alpha: %(val1)d, n: %(val2)d)'
 #             % {'val1': alpha, 'val2': n})
-plt.show()
-
-
-"""
-SECTION 3 : Testing
-"""
-
-res = matrix_mul_bias(test_X, weight, bias)
-res_2 = matrix_mul_bias(res, weight_2, bias)
-
-# Get prediction
-preds = []
-for r in res_2:
-    
-    preds.append(max(enumerate(r), key=lambda x: x[1])[0])
-
-# Print prediction
-
-print("Predictions: ", preds)
-
-# Calculate accuration
-acc = 0.0
-for i in range(len(preds)):
-    if preds[i] == int(test_y[i]):
-        acc += 1
-print("Network Accuracy: ", acc / len(preds) * 100, "%")
-
+fname = "trial" + str(trial_num) + ".png" 
+plt.savefig(fname)
