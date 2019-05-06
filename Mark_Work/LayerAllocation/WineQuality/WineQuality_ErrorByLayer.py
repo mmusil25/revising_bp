@@ -111,7 +111,8 @@ def sigmoid(A, deriv=False):
 
 
 # Define parameter
-layer_1_coeff = float(sys.argv[5]) #3
+batch_size = sys.argv[6]
+layer_1_coeff = float(sys.argv[7]) #3
 layer_2_coeff = layer_1_coeff/2
 layer_3_coeff = layer_2_coeff/2
 trial_num = sys.argv[1] # "Test"

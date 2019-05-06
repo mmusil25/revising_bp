@@ -40,8 +40,8 @@ for row in dataset:
 random.shuffle(dataset)
 datatrain = dataset[:int(len(dataset) * 0.8)]
 datatest = dataset[int(len(dataset) * 0.8):]
-train_X = [data[:11] for data in datatrain]
-train_y = [data[11] for data in datatrain]
+# train_X = [data[:11] for data in datatrain]
+# train_y = [data[11] for data in datatrain]
 test_X = [data[:11] for data in datatest]
 test_y = [data[11] for data in datatest]
 
@@ -116,6 +116,7 @@ trial_num = sys.argv[1]   # "Test"
 alfa = float(sys.argv[2]) # 0.005
 epoch = int(sys.argv[3])  # 40
 neuron = [11, int(sys.argv[4]), int(sys.argv[5]), 10]  #[11, 10, 10, 10]  # number of neuron each layer
+batch_size = sys.argv[6]
 write_out_name = "Trial" + str(trial_num) + ".txt"
 
 f = open(write_out_name, "w+")
@@ -156,6 +157,12 @@ for i in range(neuron[2]):
 cost_for_graph = []
 for e in range(epoch):
     # print(["Epoch: ", epoch])
+    datatrain = dataset[:int(len(dataset) * 0.8)]
+    random.shuffle(datatrain)
+    #datatest = dataset[int(len(dataset) * 0.8):]
+    train_X = [data[:11] for data in datatrain[:batch_size]]
+    train_y = [data[11] for data in datatrain[:batch_size]]
+    
     cost_total = 0
     for idx, x in enumerate(train_X):  # Update for each data; SGD
         
