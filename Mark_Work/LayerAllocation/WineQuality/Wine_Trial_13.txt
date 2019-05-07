@@ -1,0 +1,5 @@
+ Training sample count: 3918, Test sample count: 980 alpha: 0.0050, epoch: 500 
+ neuron[0]: 11, neuron[1]: 15, neuron[2]: 15 
+ Layer 1 Coefficient: 3.0000, Layer 2 Coefficient: 1.5000, Layer 3 Coefficient: 0.7500 
+###### Begin Training Output ###### 
+ 

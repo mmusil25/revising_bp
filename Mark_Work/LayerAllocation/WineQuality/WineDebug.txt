@@ -1,0 +1,5 @@
+ Training sample count: 3918, Test sample count: 980 alpha: 0.0050, epoch: 500 
+ neuron[0]: 11, neuron[1]: 20, neuron[2]: 20 
+###### Begin Training Output ###### 
+Epoch 0.0 out of 50.0
+Epoch cost: 0.42727 
