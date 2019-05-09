@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Multiple tests for the error-by-layer method 
+
+chmod u+x testSuiteMay1
+# python WineQuality_Control_Net.py "Wine_Control_Test" 0.005 1
+# python WineQuality_ErrorByLayer.py "Wine_Experimental_Test" 0.005 1 3
+# python ../IRIS_Control_Net.py "Iris_Control_Test" 0.005 1
+# python ../IRIS_ErrorAlloc_v2.py "Iris_Experimental_Test" 0.005 1 3
+
+
+python WineQuality_Control_Net.py "Wine_Control_13" 0.005 500 15 15 200
+python WineQuality_ErrorByLayer.py "Wine_Trial_13" 0.005 500 15 15 200 3 
+python WineQuality_Control_Net.py "Wine_Control_14" 0.005 500 20 20 200
+python WineQuality_ErrorByLayer.py "Wine_Trial_14" 0.005 500 20 20 200 4
+
