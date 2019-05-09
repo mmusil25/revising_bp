@@ -1,2 +1,4 @@
 # revising_bp
-Revising The Back Propagation Algorithm for Neural Networks
+The impetus for this capstone was the sponsor's desire to find an improved neural network training algorithm. The goal of such an algorithm is to reduce training time and resources while still achieving  state-of-the-art accuracy and generalization. The sponsor gave guidance to the group by directing us to focus on the distribution of error in the network. Specifically, the sponsor hypothesized that error resulting from inadequately trained weights in the first layer's weight matrix is amplified by the following layers and propagates the error in the first layer. This is hypothesized to also occur in successive layers. 
+
+To address this concern, several experiments were done to test methods which allocate greater error correction to earlier layers, and in specific neurons which have the highest individual error. The following methods detailed below are therefore essentially adaptive learning rate methods. The results show preliminary success in reducing training error but show worse testing accuracy than networks trained using a fixed learning rate. 
