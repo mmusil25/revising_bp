@@ -22,7 +22,7 @@ import sys
 random.seed(123)
 
 # Load dataset
-with open('../iris/iris.csv') as csvfile:
+with open('./iris/iris.csv') as csvfile:
     csvreader = csv.reader(csvfile)
     next(csvreader, None)  # skip header
     dataset = list(csvreader)

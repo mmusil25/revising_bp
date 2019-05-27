@@ -169,7 +169,6 @@ for i in range(neuron[3]):
 cost_for_graph = []
 for e in range(epoch):
     # print(["Epoch: ", epoch])
-    datatrain = dataset[:int(len(dataset) * 0.8)]
     random.shuffle(datatrain)
     #datatest = dataset[int(len(dataset) * 0.8):]
     train_X = [data[:11] for data in datatrain[:batch_size]]
