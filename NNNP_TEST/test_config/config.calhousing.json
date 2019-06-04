@@ -1,0 +1,14 @@
+{
+    "learning_rates": [0.1],
+    "optimizers": ["sgd", "layer", "neuron"],
+    "datasets": ["california_housing"],
+    "testratio": [0.1],
+    "epochs": [200],
+    "hdims": [
+        [100, 60, 40],
+        [80, 40, 30]
+    ],
+    "layer_coeff": [
+        [0.3, 0.5, 1, 2]
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "learning_rates": [0.001],
+    "optimizers": ["sgd", "layer", "neuron"],
+    "datasets": ["digits"],
+    "testratio": [0.1],
+    "epochs": [100],
+    "hdims": [
+        [10, 6],
+        [8, 4]
+    ],
+    "layer_coeff": [
+        [0.5, 1, 2]
+    ]
+}

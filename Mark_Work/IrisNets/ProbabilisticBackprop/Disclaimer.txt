@@ -1,2 +1,0 @@
-The probabilistic backpropagation network is the original work of José Miguel Hernández-Lobato and Ryan P. Adams as described in the publication "Probabilistic Backpropagation for Scalable Learning of Bayesian Neural Networks". It has been used as an educational resource for research on improved backpropagation. To see more of the original documentation visit https://jmhl.org/. 
-

@@ -1,6 +1,0 @@
- Training sample count: 120, Test sample count: 30 alpha: 0.0050, epoch: 1 
- neuron[0]: 4, neuron[1]: 5, neuron[2]: 3 
-###### Begin Training Output ###### 
-Epoch 0.0 out of 0.1
-Epoch cost: 0.40969 
-Network Accuracy: 33.3333##### End of file #####

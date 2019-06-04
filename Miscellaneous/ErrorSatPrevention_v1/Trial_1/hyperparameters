@@ -1,0 +1,11 @@
+Project: Revising Back Propagation
+Date: Mar 3, 2019
+Experiment: Error Saturation Prevention
+
+
+Hyperparameters:
+
+num_iter, num_epochs = 1000, 1
+lr = 0.1 # learning rate
+DATA_SIZE = 100
+
