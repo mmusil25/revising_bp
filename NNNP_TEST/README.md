@@ -22,7 +22,7 @@ To configure the `.json` files you need choose the arguments as detailed in the 
 Example: (from Linux terminal) >>python mlp_tests_gen.py -R
 
 
-##### Args
+#### Args
 
 *  `--dataset`: *Required. [String].* Choose the dataset to train the model.  Should be one of following option: `{winequality,iris,digits,boston,diabetes,covtype,california_housing,olivetti_faces,mnist}`
 * `--testratio`: *Optional. [Float (0 - 1)]*. Set the train test split ratio. (Default `0.1`)
