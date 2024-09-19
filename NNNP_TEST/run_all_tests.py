@@ -10,4 +10,4 @@ for f in os.listdir('./test_config/'):
 cmds = [python_path + f' mlp_tests_gen.py -R --config {i}' for i in conf_files]
 
 for cmd in cmds:
-    subprocess.call(cmd, shell=True)
+    subprocess.call(cmd, shell=False)
