@@ -35,7 +35,7 @@ def main(args, test_args):
 
     if args.direct_run:
         for cmd in cmds:
-            subprocess.call(cmd, shell=True)
+            subprocess.call(cmd, shell=False)
     else:
         with open('mlp_test'+file_ext, 'w') as script:
             for cmd in cmds:
