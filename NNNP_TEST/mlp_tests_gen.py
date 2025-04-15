@@ -3,6 +3,7 @@ import itertools
 import argparse
 import json
 import platform
+from security import safe_command
 
 file_ext = '.bat'
 
@@ -35,7 +36,7 @@ def main(args, test_args):
 
     if args.direct_run:
         for cmd in cmds:
-            subprocess.call(cmd, shell=True)
+            safe_command.run(subprocess.call, cmd, shell=True)
     else:
         with open('mlp_test'+file_ext, 'w') as script:
             for cmd in cmds:
